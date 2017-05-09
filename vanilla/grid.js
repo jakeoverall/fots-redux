@@ -22,37 +22,37 @@ var tiles = {
 	1: {
 		id: 1,
 		name: 'Amethyst',
-		url: 'imgs/amethyst.jpg'
+		url: '/imgs/amethyst.jpg'
 	},
 	2: {
 		id: 2,
 		name: 'Boundry',
-		url: 'imgs/boundry.png'
+		url: '/imgs/boundry.png'
 	},
 	3: {
 		id: 3,
 		name: 'Coal',
-		url: 'imgs/coal.jpg'
+		url: '/imgs/coal.jpg'
 	},
 	4: {
 		id: 4,
 		name: 'Cobblestone',
-		url: 'imgs/cobblestone.png'
+		url: '/imgs/cobblestone.png'
 	},
 	5: {
 		id: 5,
 		name: 'Diamond',
-		url: 'imgs/diamond.jpg'
+		url: '/imgs/diamond.jpg'
 	},
 	6: {
 		id: 6,
 		name: 'Dirt',
-		url: 'imgs/dirt.png'
+		url: '/imgs/dirt.png'
 	},
 	7: {
 		id: 7,
 		name: 'Gravel',
-		url: 'imgs/gravel.png'
+		url: '/imgs/gravel.png'
 	}
 }
 
@@ -71,12 +71,12 @@ function drawGrid(grid, tiles) {
 			var tileId = grid.map[row][col];
 			var tile = tiles[tileId]
 			tile ?
-				template += `<div id="${row}-{col}" class="cell" 
+				template += `<div id="${row}-${col}" class="cell" 
 			style="background-image: url(${tile.url});
 			height: ${grid.settings.tileResolution.y}px; 
 			width: ${grid.settings.tileResolution.x}px"></div>`
 				:
-				template += `<div id="${row}-{col}" class="cell empty" 
+				template += `<div id="${row}-${col}" class="cell empty" 
 			style="height: ${grid.settings.tileResolution.y}px; 
 			width: ${grid.settings.tileResolution.x}px"></div>`
 		}
@@ -114,11 +114,12 @@ gridElem.addEventListener('mouseup', removeDraw)
 function draw(e) {
 	gridElem.addEventListener('mousemove', draw)
 	var cell = e.target
-	if (e.ctrlKey) {
-		grid.map[cell.id] = 0
+	var id = cell.id.split('-')
+	if (e.shiftKey) {
+		grid.map[id[0]][id[1]] = 0
 	}
 	else if (activeTile) {
-		grid.map[cell.id] = activeTile.id
+		grid.map[id[0]][id[1]] = activeTile.id
 	}
 	drawGrid(grid, tiles)
 }
@@ -144,15 +145,18 @@ function updateGrid(e) {
 	brushElem.style.height = (grid.settings.tileResolution.y || brushElem.style.height) + 'px'
 	brushElem.style.width = (grid.settings.tileResolution.x || brushElem.style.width) + 'px'
 
-	var newMap = new Array(grid.settings.height)
-	newMap.forEach((row) => row = new Array(grid.settings.width))
-	newMap.forEach(r => r.map(c => c = 0))
-	while (grid.map.length < newMap.length) {
-		var i = 0
-		while (grid.map[i].length < newMap[i].length) {
-			newMap[i] = grid.map[i]
-			i++
+	var newMap = [...Array(Number(grid.settings.height))]
+	newMap = newMap.map(x => x = [...Array(Number(grid.settings.width))].map(c => c = 0))
+	var i = 0;
+	while(i < grid.map.length){
+		if(grid.map[i] && newMap[i]){
+			for(var j = 0; j < grid.map[i].length; j++){
+				if(newMap[i][j] != undefined){
+					newMap[i][j] = grid.map[i][j]
+				}
+			}
 		}
+		i++
 	}
 	grid.map = newMap
 	drawTiles(tiles)
