@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Tile Map Maker</title>
+	<link rel="stylesheet" href="grid.min.css">
+
+</head>
+
+<body>
+	<div class="dashboard">
+		<div class="sidebar-tool">
+			<i class="glyphicon glyphicon-cog"></i>
+		</div>
+		<div class="sidebar open">
+			<div class="sidebar-content">
+				<h4>Tiles</h4>
+				<ul class="list-group" id="tiles">
+				</ul>
+				<hr>
+				<form class="form" onsubmit="updateGrid(event)">
+					<fieldset>
+						<legend>Grid Settings</legend>
+						<div class="form-group">
+							<input placeholder="rows" class="form-control" type="text" name="grid-height">
+						</div>
+						<div class="form-group">
+							<input placeholder="columns" type="text" name="grid-width">
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Tile Settings</legend>
+						<div class="form-group">
+							<input placeholder="height" type="text" name="tile-height">
+						</div>
+						<div class="form-group">
+							<input placeholder="width" type="text" name="tile-width">
+						</div>
+					</fieldset>
+					<div class="">
+						<button type="submit">Apply</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="main-content pushed">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12">
+						<img id="brush" height="64" src="" class="" alt="brush">
+						<div id="grid" class="grid">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script src="grid.js"></script>
+
+</body>
+
+</html>
