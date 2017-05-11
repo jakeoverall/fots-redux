@@ -1,4 +1,14 @@
 import * as firebase from 'firebase'
+import Vue from 'vue'
+import amethyst from '../assets/imgs/amethyst.jpg'
+import boundry from '../assets/imgs/boundry.png'
+import coal from '../assets/imgs/coal.jpg'
+import cob from '../assets/imgs/cobblestone.png'
+import diamond from '../assets/imgs/diamond.jpg'
+import dirt from '../assets/imgs/dirt.png'
+import gravel from '../assets/imgs/gravel.png'
+
+
 
 var config = {
   apiKey: "AIzaSyBh1XI-IRolKG1Sm5g9K-_5cntDkB5igDw",
@@ -14,18 +24,73 @@ const firebaseApp = firebase.initializeApp(config)
 
 export default {
   state: {
-    grid: {},
-    tiles: {},
+    grid: {
+      settings: {
+        width: 10,
+        height: 7,
+        tileResolution: {
+          x: 64,
+          y: 64
+        }
+      },
+      map: [
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+        [2, 6, 6, 1, 6, 6, 6, 6, 6, 2],
+        [2, 6, 6, 7, 7, 7, 6, 6, 6, 2],
+        [2, 3, 6, 7, 5, 7, 6, 6, 6, 2],
+        [2, 6, 6, 7, 7, 7, 6, 4, 6, 2],
+        [2, 6, 6, 6, 6, 6, 4, 6, 6, 2],
+        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+      ]
+    },
+    tiles: {
+      1: {
+        id: 1,
+        name: 'Amethyst',
+        url: amethyst
+      },
+      2: {
+        id: 2,
+        name: 'Boundry',
+        url: boundry
+      },
+      3: {
+        id: 3,
+        name: 'Coal',
+        url: coal
+      },
+      4: {
+        id: 4,
+        name: 'Cobblestone',
+        url: cob
+      },
+      5: {
+        id: 5,
+        name: 'Diamond',
+        url: diamond
+      },
+      6: {
+        id: 6,
+        name: 'Dirt',
+        url: dirt
+      },
+      7: {
+        id: 7,
+        name: 'Gravel',
+        url: gravel
+      }
+    },
     activeTile: {}
   },
   mutations: {
-    CHANGE_GRID({ state }, payload) {
+    CHANGE_GRID(state, payload) {
       state.grid = payload.data
+      Vue.nextTick()
     },
-    CHANGE_TILES({ state }, payload) {
+    CHANGE_TILES(state, payload) {
       state.tiles = payload.data
     },
-    CHANGE_ACTIVETILE({ state }, payload) {
+    CHANGE_ACTIVETILE(state, payload) {
       state.activeTile = payload.data
     }
   },
@@ -58,6 +123,7 @@ export default {
       })
     },
     updateGridMap({ commit }, grid) {
+
       commit('CHANGE_GRID', { data: grid })
 
       // Sockets are even more fun :)
