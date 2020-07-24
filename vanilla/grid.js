@@ -22,37 +22,37 @@ var tiles = {
 	1: {
 		id: 1,
 		name: 'Amethyst',
-		url: '/imgs/amethyst.jpg'
+		url: '../imgs/amethyst.jpg'
 	},
 	2: {
 		id: 2,
 		name: 'Boundry',
-		url: '/imgs/boundry.png'
+		url: '../imgs/boundry.png'
 	},
 	3: {
 		id: 3,
 		name: 'Coal',
-		url: '/imgs/coal.jpg'
+		url: '../imgs/coal.jpg'
 	},
 	4: {
 		id: 4,
 		name: 'Cobblestone',
-		url: '/imgs/cobblestone.png'
+		url: '../imgs/cobblestone.png'
 	},
 	5: {
 		id: 5,
 		name: 'Diamond',
-		url: '/imgs/diamond.jpg'
+		url: '../imgs/diamond.jpg'
 	},
 	6: {
 		id: 6,
 		name: 'Dirt',
-		url: '/imgs/dirt.png'
+		url: '../imgs/dirt.png'
 	},
 	7: {
 		id: 7,
 		name: 'Gravel',
-		url: '/imgs/gravel.png'
+		url: '../imgs/gravel.png'
 	}
 }
 
